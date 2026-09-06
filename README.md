@@ -18,3 +18,17 @@ Inspired by the research on model verification (e.g., Lampert et al.), the class
 Run the benchmark to see the robustness certification in action:
 ```bash
 python benchmark_run.py
+
+````````````
+
+## 📊 Methodology
+The certifier validates the mathematical stability of the prediction by checking the following condition:
+
+$$\Delta(x) > \sum_{i \in \mathcal{K}} \text{impact}(w_i)$$
+
+**Where:**
+- $\Delta(x)$ is the classification margin (the difference between the log-probability of the predicted class and the next best class).
+- $\mathcal{K}$ represents the set of the top-$K$ most influential words (features) within the adversarial budget.
+- $\text{impact}(w_i)$ is the absolute difference in log-likelihoods for word $i$ across classes.
+
+If this condition holds, the model is **mathematically guaranteed** to maintain its prediction even if an attacker modifies any $K$ words in the input.
